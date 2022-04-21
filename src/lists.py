@@ -101,12 +101,7 @@ def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     >>> print(x)
     [2, 4]
     """
-    link = x.head.next
-    while link != x.head:
-        n = link.next
-        if not p(link.val):
-            remove_link(link)
-        link = n
+    ...
 
 
 def reverse(x: DLList[T]) -> None:
@@ -118,22 +113,7 @@ def reverse(x: DLList[T]) -> None:
     >>> print(x)
     [5, 4, 3, 2, 1]
     """
-    link = x.head.next
-    while link != x.head:
-        n = link.next
-        link.prev, link.next = link.next, link.prev
-        link = n
-    x.head.prev, x.head.next = x.head.next, x.head.prev
-
-
-def smallest(start: Link[S], end: Link[S]) -> Link[S]:
-    """Get the link with the smallest value between start and end."""
-    m = start
-    while start is not end:
-        if start.val < m.val:
-            m = start
-        start = start.next
-    return m
+    ...
 
 
 def sort(x: DLList[S]) -> None:
@@ -145,12 +125,4 @@ def sort(x: DLList[S]) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
-    # This is a selection sort where everything from
-    # head to front is sorted and the rest is where we
-    # pick the smallest element from
-    front = x.head
-    while front.next is not x.head:
-        m = smallest(front.next, x.head)
-        remove_link(m)
-        insert_after(front, m.val)
-        front = front.next
+    ...
