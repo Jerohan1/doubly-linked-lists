@@ -33,7 +33,7 @@ def remove_link(link: Link[T]) -> None:
     link.next.prev = link.prev
 ```
 
-The functions assume that we always have non-`None` links before and after the links we manipulate. We can assure that if we have dummy elements at both ends of the list. I have done that, but with a twist: I use the same link at both ends, thus creating a so-called *circular list*.
+The functions assume that we always have non-`None` links before and after the links we manipulate. We can assure that if we have dummy elements at both ends of the list. Here it is done, but with a twist: Here it uses the same link at both ends, thus creating a so-called *circular list*.
 
 ```python
 class DLList(Generic[T]):
