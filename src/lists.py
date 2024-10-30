@@ -1,52 +1,29 @@
 """Doubly-linked lists."""
 
-from __future__ import annotations
-from typing import (
-    Generic, TypeVar, Iterable,
-    Callable, Protocol
-)
-
-
-class Comparable(Protocol):
-    """Type info for specifying that objects can be compared with <."""
-
-    def __lt__(self, other: Comparable) -> bool:
-        """Less than, <, operator."""
-        ...
-
-
-T = TypeVar('T')
-S = TypeVar('S', bound=Comparable)
-
-
-class Link(Generic[T]):
+class Link:
     """Doubly linked link."""
 
-    val: T
-    prev: Link[T]
-    next: Link[T]
-
-    def __init__(self, val: T, p: Link[T], n: Link[T]):
+    def __init__(self, val, p, n):
         """Create a new link and link up prev and next."""
         self.val = val
         self.prev = p
         self.next = n
 
 
-def insert_after(link: Link[T], val: T) -> None:
+def insert_after(link: Link, val) -> None:
     """Add a new link containing avl after link."""
     new_link = Link(val, link, link.next)
     new_link.prev.next = new_link
     new_link.next.prev = new_link
 
 
-def remove_link(link: Link[T]) -> None:
+def remove_link(link: Link) -> None:
     """Remove link from the list."""
     link.prev.next = link.next
     link.next.prev = link.prev
 
 
-class DLList(Generic[T]):
+class DLList:
     """
     Wrapper around a doubly-linked list.
 
@@ -60,9 +37,9 @@ class DLList(Generic[T]):
     [1, 2, 3, 4]
     """
 
-    head: Link[T]  # Dummy head link
+    head: Link  # Dummy head link
 
-    def __init__(self, seq: Iterable[T] = ()):
+    def __init__(self, seq):
         """Create a new circular list from a sequence."""
         # Configure the head link.
         # We are violating the type invariants this one place,
@@ -92,7 +69,7 @@ class DLList(Generic[T]):
 
 # Exercises
 
-def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
+def keep(x: DLList, p) -> None:
     """
     Remove all elements from x that do not satisfy the predicate p.
 
@@ -101,10 +78,10 @@ def keep(x: DLList[T], p: Callable[[T], bool]) -> None:
     >>> print(x)
     [2, 4]
     """
-    ...
+    # YOUR CODE GOES HERE
 
 
-def reverse(x: DLList[T]) -> None:
+def reverse(x: DLList) -> None:
     """
     Reverse the list x.
 
@@ -113,10 +90,9 @@ def reverse(x: DLList[T]) -> None:
     >>> print(x)
     [5, 4, 3, 2, 1]
     """
-    ...
+    # YOUR CODE GOES HERE
 
-
-def sort(x: DLList[S]) -> None:
+def sort(x: DLList) -> None:
     """
     Sort the list x.
 
@@ -125,4 +101,4 @@ def sort(x: DLList[S]) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
-    ...
+   # YOUR CODE GOES HERE
