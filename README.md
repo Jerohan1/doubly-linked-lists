@@ -3,14 +3,13 @@
 Here's a way to implement a link in a doubly-linked list:
 
 ```python
-class Link(Generic[T]):
-    """Doubly linked link."""
-
-    val: T
-    prev: Link[T]
-    next: Link[T]
-
-    def __init__(self, val: T, p: Link[T], n: Link[T]):
+class Link:
+    """
+    Doubly linked Link.
+    p and n are also of the Link class.
+    val is the contained value of the link (whatever is in the list at the position of the Link).
+    """
+    def __init__(self, val: T, p, n):
         """Create a new link and link up prev and next."""
         self.val = val
         self.prev = p
@@ -20,14 +19,14 @@ class Link(Generic[T]):
 and functions for adding a new link or removing an existing one:
 
 ```python
-def insert_after(link: Link[T], val: T) -> None:
+def insert_after(link: Link, val) -> None:
     """Add a new link containing avl after link."""
     new_link = Link(val, link, link.next)
     new_link.prev.next = new_link
     new_link.next.prev = new_link
 
 
-def remove_link(link: Link[T]) -> None:
+def remove_link(link: Link) -> None:
     """Remove link from the list."""
     link.prev.next = link.next
     link.next.prev = link.prev
@@ -36,7 +35,7 @@ def remove_link(link: Link[T]) -> None:
 The functions assume that we always have non-`None` links before and after the links we manipulate. We can assure that if we have dummy elements at both ends of the list. Here it is done, but with a twist: Here it uses the same link at both ends, thus creating a so-called *circular list*.
 
 ```python
-class DLList(Generic[T]):
+class DLList:
     """
     Wrapper around a doubly-linked list.
 
@@ -50,9 +49,9 @@ class DLList(Generic[T]):
     [1, 2, 3, 4]
     """
 
-    head: Link[T]  # Dummy head link
+    head: Link  # Dummy head link
 
-    def __init__(self, seq: Iterable[T] = ()):
+    def __init__(self, seq):
         """Create a new circular list from a sequence."""
         self.head = Link(None, None, None)
         self.head.prev = self.head
