@@ -9,7 +9,7 @@ class Link:
     p and n are also of the Link class.
     val is the contained value of the link (whatever is in the list at the position of the Link).
     """
-    def __init__(self, val: T, p, n):
+    def __init__(self, val, p, n):
         """Create a new link and link up prev and next."""
         self.val = val
         self.prev = p
