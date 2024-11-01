@@ -79,6 +79,15 @@ def keep(x: DLList, p) -> None:
     [2, 4]
     """
     # YOUR CODE GOES HERE
+    lin = x.head.next
+    while lin and lin is not x.head:
+        if not p(lin.val):
+            remove_link(lin)    
+        lin = lin.next
+        
+x = DLList([1, 2, 3, 4, 5])
+keep(x, lambda a: a % 2 == 0)
+print(x)
 
 
 def reverse(x: DLList) -> None:
@@ -91,6 +100,16 @@ def reverse(x: DLList) -> None:
     [5, 4, 3, 2, 1]
     """
     # YOUR CODE GOES HERE
+    lin = x.head.prev
+    while lin and lin is not x.head:
+        lin.next, lin.prev = lin.prev, lin.next
+        lin = lin.next            
+    
+    lin.next, lin.prev = lin.prev, lin.next
+    
+x = DLList([1, 2, 3, 4, 5])
+reverse(x)
+print(x)
 
 def sort(x: DLList) -> None:
     """
@@ -101,4 +120,20 @@ def sort(x: DLList) -> None:
     >>> print(x)
     [1, 3, 4, 5, 6, 12]
     """
-   # YOUR CODE GOES HERE
+    # YOUR CODE GOES HERE
+    
+    swapped = True
+    last = None
+    while swapped: 
+        swapped = False
+        lin = x.head.next
+        while lin.next != last and lin.next is not x.head:
+            if lin.val > lin.next.val:
+                lin.val, lin.next.val = lin.next.val, lin.val
+                swapped = True
+            lin = lin.next
+        last = lin
+   
+x = DLList([1, 3, 12, 6, 4, 5])
+sort(x)
+print(x)
